@@ -1,3 +1,5 @@
+import {FC} from "react";
+
 export type Step = number
 export type Login = string;
 export type Password = string;
@@ -7,3 +9,5 @@ export interface FormsData {
     login: Login,
     password: Password
 }
+
+export type AppContent = Record<number, FC>

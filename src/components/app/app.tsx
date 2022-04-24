@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import AppStyled from "./app.styled";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import AppContent from "./app-content.styled";
-import {Step} from "./app.types";
+import {AppContent, Step} from "./app.types";
 
 
 const App = () => {
@@ -15,12 +14,14 @@ const App = () => {
 
     window.localStorage.setItem('step', step.toString());
 
+    const appContent: AppContent = {
+
+    }
+
     return (
         <AppStyled>
             <Header currStep={step}/>
-            <AppContent>
-
-            </AppContent>
+            {/*{appContent[step]}*/}
             <Footer onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
         </AppStyled>
     );
