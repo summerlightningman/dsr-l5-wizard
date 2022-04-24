@@ -4,6 +4,7 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import {AppContent, Step} from "./app.types";
 import LoginPassword from "../step-pages/login-password/login-password";
+import SubscriptionType from "../step-pages/subscription-type/subscription-type";
 
 
 const App = () => {
@@ -17,7 +18,8 @@ const App = () => {
     window.localStorage.setItem('step', step.toString());
 
     const appContent: AppContent = {
-        1: <LoginPassword setIsValid={setIsValid}/>
+        1: <LoginPassword setIsValid={setIsValid}/>,
+        2: <SubscriptionType setIsValid={setIsValid}/>
     };
 
     return (
