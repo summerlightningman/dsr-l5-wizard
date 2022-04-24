@@ -12,15 +12,23 @@ const SubscriptionType: FC<SubscriptionTypeProps> = ({setIsValid}) => {
     const handleChange: ChangeEventHandler<HTMLSelectElement> = e =>
         setValue(e.currentTarget.value);
 
-    return <SubscriptionTypeStyled>
-        <Label htmlFor="subscription_type">Subscription type</Label>
-        <Dropdown value={value} onChange={handleChange} id="subscription_type">
-            <option value="none">Not selected</option>
-            <option value="free">Free</option>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-        </Dropdown>
-    </SubscriptionTypeStyled>
+    const goToNextStep = () => {
+        window.localStorage.setItem(storageKey, JSON.stringify({subscriptionType: value}));
+        onNextStep();
+    }
+
+    return <>
+        <SubscriptionTypeStyled>
+            <Label htmlFor="subscription_type">Subscription type</Label>
+            <Dropdown value={value} onChange={handleChange} id="subscription_type">
+                <option value={Subscription.NONE}>Not selected</option>
+                <option value={Subscription.FREE}>Free</option>
+                <option value={Subscription.MONTHLY}>Monthly</option>
+                <option value={Subscription.YEARLY}>Yearly</option>
+            </Dropdown>
+        </SubscriptionTypeStyled>
+        <Footer onPrevStep={onPrevStep} onNextStep={goToNextStep} isValid={isValid}/>
+    </>
 }
 
 export default SubscriptionType

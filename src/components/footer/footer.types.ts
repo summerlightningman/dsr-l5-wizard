@@ -1,6 +1,5 @@
-import {MouseEventHandler} from "react";
+import {ButtonPressHandler} from "../step-pages/step-pages.types";
 
-export type ButtonPressHandler = MouseEventHandler<HTMLButtonElement>
 
 export interface FooterProps {
     onNextStep: ButtonPressHandler,

@@ -1,5 +1,6 @@
-import {Dispatch} from "react";
+export type ButtonPressHandler = () => void
 
 export interface StepPageProps {
-    setIsValid: Dispatch<boolean>
+    onNextStep: ButtonPressHandler,
+    onPrevStep: ButtonPressHandler,
 }

@@ -26,8 +26,12 @@ const LoginPassword: FC<LoginPasswordProps> = ({setIsValid}) => {
     const handleInput = (type: LoginPasswordActionType): KeyboardEventHandler<HTMLInputElement> =>
         e => dispatch({type, payload: e.currentTarget.value});
 
+    const handleNextStepClick = () => {
+        window.localStorage.setItem('1', JSON.stringify({login, password}));
+        onNextStep();
+    };
 
-    return (
+    return <>
         <LoginPasswordStyled>
             <Label htmlFor="login">Login</Label>
             <Label htmlFor="password">Password</Label>
