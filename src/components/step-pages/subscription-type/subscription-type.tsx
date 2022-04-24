@@ -1,15 +1,21 @@
 import {ChangeEventHandler, FC, useState} from "react";
-import {SubscriptionTypeProps, SubscriptionTypeValue} from "./subscription-type.types";
+import {Subscription, SubscriptionTypeProps} from "./subscription-type.types";
 import SubscriptionTypeStyled from "./subscription-type.styled";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
+import Footer from "../../footer/footer";
 
-const SubscriptionType: FC<SubscriptionTypeProps> = ({setIsValid}) => {
-    const [value, setValue] = useState<SubscriptionTypeValue>('');
-
-    setIsValid(value !== 'none');
+const SubscriptionType: FC<SubscriptionTypeProps> = ({onPrevStep, onNextStep}) => {
+    const storageKey = '2';
+    const defaultValue = window.localStorage.getItem(storageKey) === null
+        ? Subscription.NONE
+        // @ts-ignore
+        : JSON.parse(window.localStorage.getItem(storageKey))['subscriptionType'];
+    const [value, setValue] = useState<Subscription>(defaultValue);
+    const isValid = value !== Subscription.NONE
 
     const handleChange: ChangeEventHandler<HTMLSelectElement> = e =>
+        // @ts-ignore
         setValue(e.currentTarget.value);
 
     const goToNextStep = () => {

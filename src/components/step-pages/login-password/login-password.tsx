@@ -1,15 +1,16 @@
-import {FC, KeyboardEventHandler, useMemo, useReducer} from 'react';
+import {FC, KeyboardEventHandler, useReducer} from 'react';
 
 import LoginPasswordStyled from "./login-password.styled";
 import FormInput from "../../ui/form-input";
 import Label from "../../ui/label";
 import {LoginPasswordActionType, LoginPasswordProps} from "./login-password.types";
 import loginPasswordReducer, {loginPasswordInitialState} from "./login-password.reducer";
+import Footer from "../../footer/footer";
 
 
-const LoginPassword: FC<LoginPasswordProps> = ({setIsValid}) => {
+const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep}) => {
     const [{login, password, passwordRetype}, dispatch] = useReducer(loginPasswordReducer, loginPasswordInitialState);
-    const validators: boolean[] = useMemo(() => [
+    const isValid = [
         !!login,
         !!password,
         !!passwordRetype,
@@ -17,11 +18,8 @@ const LoginPassword: FC<LoginPasswordProps> = ({setIsValid}) => {
         login.length > 5,
         /\w+/.test(password),
         /\d+/.test(password)
-    ], [login, password, passwordRetype]);
+    ].every(_ => _);
 
-    setIsValid(
-        validators.every(_ => _)
-    );
 
     const handleInput = (type: LoginPasswordActionType): KeyboardEventHandler<HTMLInputElement> =>
         e => dispatch({type, payload: e.currentTarget.value});
@@ -42,7 +40,8 @@ const LoginPassword: FC<LoginPasswordProps> = ({setIsValid}) => {
             <FormInput type="password" id="password_retype" value={passwordRetype}
                        onInput={handleInput(LoginPasswordActionType.SET_PASSWORD_RETYPE)}/>
         </LoginPasswordStyled>
-    );
+        <Footer onNextStep={handleNextStepClick} onPrevStep={onPrevStep} isValid={isValid}/>
+    </>
 };
 
 export default LoginPassword;

@@ -1,8 +1,8 @@
 import {LoginPasswordAction, LoginPasswordActionType, LoginPasswordState} from "./login-password.types";
 
 export const loginPasswordInitialState: LoginPasswordState = {
-    login: '',
-    password: '',
+    login: JSON.parse(localStorage.getItem('1')!)['login'],
+    password: JSON.parse(localStorage.getItem('1')!)['password'],
     passwordRetype: ''
 }
 
