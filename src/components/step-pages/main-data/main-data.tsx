@@ -23,7 +23,8 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         !!lastname,
         more18,
         gender !== Gender.NONE,
-        !!email
+        !!email,
+        /[a-zA-Z0-9-_.]{3,}@([a-z]{2,}\.[a-z]+)+/.test(email)
     ].every(_ => _);
 
     const handleInput = (type: MainDataActionType): KeyboardEventHandler<HTMLInputElement> => e =>
