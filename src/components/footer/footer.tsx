@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import FooterStyled from "./footer.styled";
-import ButtonsPanel from "./buttons-panel.styled";
+
 import ControlButton from "../ui/control-button";
 import {FooterProps} from "./footer.types";
 
@@ -11,10 +11,8 @@ const Footer: FC<FooterProps> = ({onPrevStep, onNextStep}) => {
 
     return (
         <FooterStyled>
-            <ButtonsPanel>
-                <ControlButton onClick={onPrevStep} disabled={isPrevDisabled}>Previous</ControlButton>
-                <ControlButton onClick={onNextStep}>Next</ControlButton>
-            </ButtonsPanel>
+            <ControlButton onClick={onPrevStep} disabled={isPrevDisabled} id="prev">Previous</ControlButton>
+            <ControlButton onClick={onNextStep} id="next">Next</ControlButton>
         </FooterStyled>
     );
 };
