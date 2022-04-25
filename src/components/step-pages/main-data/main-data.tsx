@@ -2,12 +2,12 @@ import {ChangeEventHandler, FC, KeyboardEventHandler, useReducer} from "react";
 import {Gender, MainDataActionType, MainDataProps} from "./main-data.types";
 import MainDataStyled from "./main-data.styled";
 import FormInput from "../../ui/form-input";
-import mainDataReducer, {initialState} from "./main-data.reducer";
+import mainDataReducer, {getInitialState} from "./main-data.reducer";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
 import Footer from "../../footer/footer";
 
-const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
+const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep, storageKey}) => {
     const [{
         surname,
         name,
@@ -16,7 +16,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         more18,
         gender,
         email
-    }, dispatch] = useReducer(mainDataReducer, initialState);
+    }, dispatch] = useReducer(mainDataReducer, getInitialState(storageKey));
     const isValid = [
         !!surname,
         !!name,
@@ -24,7 +24,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         more18,
         gender !== Gender.NONE,
         !!email,
-        /[a-zA-Z0-9-_.]{3,}@([a-z]{2,}\.[a-z]+)+/.test(email)
+        /[a-zA-Z\d-_.]{3,}@([a-z]{2,}\.[a-z]+)+/.test(email)
     ].every(_ => _);
 
     const handleInput = (type: MainDataActionType): KeyboardEventHandler<HTMLInputElement> => e =>
@@ -36,7 +36,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         // @ts-ignore
         dispatch({type: MainDataActionType.SET_GENDER, payload: e.currentTarget.value});
     const handleNextStepClick = () => {
-        window.localStorage.setItem('3', JSON.stringify({
+        window.localStorage.setItem(storageKey, JSON.stringify({
             surname, name, lastname, dateOfBirth, more18, gender, email
         }));
         onNextStep();

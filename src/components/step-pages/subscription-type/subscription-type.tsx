@@ -4,14 +4,11 @@ import SubscriptionTypeStyled from "./subscription-type.styled";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
 import Footer from "../../footer/footer";
+import {getStorageDataByKey} from "../step-pages.helpers";
 
-const SubscriptionType: FC<SubscriptionTypeProps> = ({onPrevStep, onNextStep}) => {
-    const storageKey = '2';
-    const defaultValue = window.localStorage.getItem(storageKey) === null
-        ? Subscription.NONE
-        // @ts-ignore
-        : JSON.parse(window.localStorage.getItem(storageKey))['subscriptionType'];
-    const [value, setValue] = useState<Subscription>(defaultValue);
+const SubscriptionType: FC<SubscriptionTypeProps> = ({onPrevStep, onNextStep, storageKey}) => {
+    const initialValue = getStorageDataByKey(storageKey)?.subscriptionType || Subscription.NONE;
+    const [value, setValue] = useState<Subscription>(initialValue);
     const isValid = value !== Subscription.NONE
 
     const handleChange: ChangeEventHandler<HTMLSelectElement> = e =>

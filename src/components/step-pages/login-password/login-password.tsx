@@ -4,12 +4,16 @@ import LoginPasswordStyled from "./login-password.styled";
 import FormInput from "../../ui/form-input";
 import Label from "../../ui/label";
 import {LoginPasswordActionType, LoginPasswordProps} from "./login-password.types";
-import loginPasswordReducer, {loginPasswordInitialState} from "./login-password.reducer";
+import loginPasswordReducer, {getLoginPasswordInitialState} from "./login-password.reducer";
 import Footer from "../../footer/footer";
 
 
-const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep}) => {
-    const [{login, password, passwordRetype}, dispatch] = useReducer(loginPasswordReducer, loginPasswordInitialState);
+const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep, storageKey}) => {
+    const [{
+        login,
+        password,
+        passwordRetype
+    }, dispatch] = useReducer(loginPasswordReducer, getLoginPasswordInitialState(storageKey));
     const isValid = [
         !!login,
         !!password,
@@ -25,7 +29,7 @@ const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep}) => {
         e => dispatch({type, payload: e.currentTarget.value});
 
     const handleNextStepClick = () => {
-        window.localStorage.setItem('1', JSON.stringify({login, password}));
+        window.localStorage.setItem(storageKey, JSON.stringify({login, password}));
         onNextStep();
     };
 

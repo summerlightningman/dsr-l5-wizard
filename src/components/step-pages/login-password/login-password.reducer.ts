@@ -1,12 +1,17 @@
 import {LoginPasswordAction, LoginPasswordActionType, LoginPasswordState} from "./login-password.types";
+import {StorageKey} from "../step-pages.types";
+import {getStorageDataByKey} from "../step-pages.helpers";
 
-export const loginPasswordInitialState: LoginPasswordState = {
-    login: JSON.parse(localStorage.getItem('1')!)['login'],
-    password: JSON.parse(localStorage.getItem('1')!)['password'],
-    passwordRetype: ''
-}
+export const getLoginPasswordInitialState = (storageKey: StorageKey): LoginPasswordState => {
+    const initialData = getStorageDataByKey(storageKey);
+    return {
+        login: initialData?.login,
+        password: initialData?.password,
+        passwordRetype: ''
+    }
+};
 
-const loginPasswordReducer = (state = loginPasswordInitialState, action: LoginPasswordAction) => {
+const loginPasswordReducer = (state: LoginPasswordState, action: LoginPasswordAction) => {
     switch (action.type) {
         case LoginPasswordActionType.SET_LOGIN:
             return {...state, login: action.payload}

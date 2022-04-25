@@ -16,13 +16,13 @@ const App = () => {
     const content = useMemo(() => {
         switch (step) {
             case 1:
-                return <LoginPassword onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <LoginPassword onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="1"/>
             case 2:
-                return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="2"/>
             case 3:
-                return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="3"/>
             case 4:
-                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="4"/>
         }
         return <></>
     }, [goToNextStep, goToPrevStep, step])
