@@ -4,20 +4,15 @@ import Footer from "../../footer/footer";
 import {BankCardProps, BankNum} from "./bank-card.types";
 import FormInput from "../../ui/form-input";
 import Label from "../../ui/label";
+import {replaceRight} from "../main-data/main-data.helpers";
 
 const BankCard: FC<BankCardProps> = ({onPrevStep, onNextStep}) => {
     const [num, setNum] = useState<BankNum>('____ — ____ — ____ — ____');
     const isValid: boolean = !num.includes('_');
 
     const handleInput: KeyboardEventHandler<HTMLInputElement> = e => {
-        if (e.key === 'Backspace'){
-            const result = num
-                .split('').reverse().join('')
-                .replace(/\d/, '_')
-                .split('').reverse().join('');
-            setNum(result);
-        }
-
+        if (e.key === 'Backspace')
+            return setNum(replaceRight(/\d/, num));
         if (!/\d/.test(e.key))
             return
         setNum(num.replace('_', e.key));
