@@ -5,6 +5,7 @@ import {Step} from "./app.types";
 import LoginPassword from "../step-pages/login-password/login-password";
 import SubscriptionType from "../step-pages/subscription-type/subscription-type";
 import MainData from "../step-pages/main-data/main-data";
+import BankCard from "../step-pages/bank-card/bank-card";
 
 
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
                 return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
             case 3:
                 return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+            case 4:
+                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
         }
         return <></>
     }, [goToNextStep, goToPrevStep, step])

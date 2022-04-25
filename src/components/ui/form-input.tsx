@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {FormInputProps} from "./types";
 
-const FormInput = styled.input`
+const FormInput = styled.input<FormInputProps>`
   background: #778898;
   padding: 11px;
   width: 100%;
@@ -13,6 +14,7 @@ const FormInput = styled.input`
   font-weight: 400;
   font-size: 40px;
   line-height: 48px;
+  text-align: ${props => props.textAlign || 'start'};
   
   outline: none;
 `;
