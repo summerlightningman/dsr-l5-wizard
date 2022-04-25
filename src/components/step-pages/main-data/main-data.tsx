@@ -36,7 +36,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         // @ts-ignore
         dispatch({type: MainDataActionType.SET_GENDER, payload: e.currentTarget.value});
     const handleNextStepClick = () => {
-        window.localStorage.setKey('3', JSON.stringify({
+        window.localStorage.setItem('3', JSON.stringify({
             surname, name, lastname, dateOfBirth, more18, gender, email
         }));
         onNextStep();
@@ -50,8 +50,8 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
             <FormInput id="name" value={name} onInput={handleInput(MainDataActionType.SET_NAME)}/>
             <Label htmlFor="lastname">Lastname</Label>
             <FormInput id="lastname" value={lastname} onInput={handleInput(MainDataActionType.SET_LASTNAME)}/>
-            <Label htmlFor="dateOfBirth">Date of birth</Label>
-            <FormInput id="dateOfBirth" type="date" value={dateOfBirth}
+            <Label htmlFor="date_of_birth">Date of birth</Label>
+            <FormInput id="date_of_birth" type="date" value={dateOfBirth}
                        onInput={handleInput(MainDataActionType.SET_DATE_OF_BIRTH)}/>
             <Label htmlFor="email">E-Mail</Label>
             <FormInput id="email" type="email" value={email} onInput={handleInput(MainDataActionType.SET_EMAIL)}/>
@@ -60,8 +60,8 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
                 <option value={Gender.MALE}>{Gender.MALE}</option>
                 <option value={Gender.FEMALE}>{Gender.FEMALE}</option>
             </Dropdown>
-            <Label htmlFor="more18" alignItems="center">I am 18+ years ago</Label>
-            <FormInput id="more18" type="checkbox" checked={more18} onChange={handleCheck}/>
+            <Label htmlFor="more_18" alignItems="center">I am 18+ years ago</Label>
+            <FormInput id="more_18" type="checkbox" checked={more18} onChange={handleCheck}/>
         </MainDataStyled>
         <Footer onNextStep={handleNextStepClick} onPrevStep={onPrevStep} isValid={isValid}/>
     </>

@@ -3,7 +3,8 @@ import styled from "styled-components";
 const FormInput = styled.input`
   background: #778898;
   padding: 11px;
-  
+  width: 100%;
+  height: auto;
   border: none;
 
   color: #FFF;

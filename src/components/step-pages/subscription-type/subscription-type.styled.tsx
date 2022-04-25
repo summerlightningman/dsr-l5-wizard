@@ -8,11 +8,11 @@ const SubscriptionTypeStyled = styled(StepPage)`
   }
 
   #subscription_type {
-    grid-row-start: 6;
+    grid-row: 5 / 7;
   }
 
   [for=subscription_type] {
-    grid-row-start: 5;
+    grid-row-start: 4;
   }
 `;
 

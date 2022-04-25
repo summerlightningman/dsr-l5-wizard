@@ -8,8 +8,9 @@ const StepPage = styled.main`
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(12, 1fr);
-  grid-row-gap: 20px;
-  grid-column-gap: 20px;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  grid-gap: 20px;
 `;
 
 export default StepPage

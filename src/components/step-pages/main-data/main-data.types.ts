@@ -6,14 +6,13 @@ export interface MainDataProps extends StepPageProps {
 }
 
 
-
 export type Surname = string;
 export type Name = string;
 export type Lastname = string;
 export type DateOfBirth = string;
 export type Email = string;
 export enum Gender {
-    NONE = 'NONE',
+    NONE = 'Select gender...',
     MALE = 'male',
     FEMALE = 'female'
 }

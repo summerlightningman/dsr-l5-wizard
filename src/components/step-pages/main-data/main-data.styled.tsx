@@ -10,48 +10,40 @@ const MainDataStyled = styled(StepPage)`
     grid-row-start: 3;
   }
 
-  [for=surname], #surname {
-    grid-column: 1 / 5;
+  [for=surname], #surname, #date_of_birth, [for=date_of_birth], #gender {
+    grid-column: 1 / span 3;
   }
 
-  [for=name], #name {
-    grid-column: 6 / 9;
+  [for=name], #name, #email, [for=email], #more_18 {
+    grid-column-start: 5;
+  }
+  
+  #name, [for=name] {
+    grid-column-end: span 4;
+  }
+  
+  #email, [for=email] {
+    grid-column-end: span 9;
   }
 
   [for=lastname], #lastname {
-    grid-column: 10 / 13;
+    grid-column: 10 / span 4;
   }
 
-  [for=dateOfBirth], [for=email] {
+  [for=date_of_birth], [for=email] {
     grid-row: 5;
   }
 
-  #dateOfBirth, #email {
+  #date_of_birth, #email {
     grid-row: 6;
   }
-
-  [for=dateOfBirth], #dateOfBirth {
-    grid-column: 1 / 4;
-  }
-
-  [for=email], #email {
-    grid-column: 5 / 13;
-  }
-
-  #gender, #more18, [for=more18] {
+  
+  #gender, #more_18, [for=more_18] {
     grid-row: 8;
   }
-
-  #gender {
-    grid-column: 1 / 4;
-  }
-
-  #more18 {
-    grid-column: 9;
-  }
-
-  [for=more18] {
-    grid-column: 10 / 13;
+  
+  [for=more_18] {
+    grid-column: 6 / 12;
   }
 `;
 
