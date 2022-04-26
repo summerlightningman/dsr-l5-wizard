@@ -1,6 +1,6 @@
 import {Gender, MainDataAction, MainDataActionType, MainDataState} from "./main-data.types";
 import {FormData} from "../step-pages.types";
-import {getStorageData} from "../step-pages.helpers";
+import {getStorageData, strToBool} from "../step-pages.helpers";
 
 export const mainDataInitialState: MainDataState = {
     surname: getStorageData(FormData.SURNAME) || '',
@@ -9,7 +9,7 @@ export const mainDataInitialState: MainDataState = {
     dateOfBirth: getStorageData(FormData.DATE_OF_BIRTH) || new Date().toLocaleString('ru-RU'),
     email: getStorageData(FormData.EMAIL) || '',
     gender: getStorageData(FormData.GENDER) as Gender || Gender.NONE,
-    more18: !!getStorageData(FormData.MORE_18)
+    more18: strToBool(getStorageData(FormData.MORE_18))
 }
 
 const mainDataReducer = (state: MainDataState, action: MainDataAction): MainDataState => {

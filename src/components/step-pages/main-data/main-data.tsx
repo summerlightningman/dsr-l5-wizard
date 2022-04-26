@@ -6,7 +6,7 @@ import mainDataReducer, {mainDataInitialState} from "./main-data.reducer";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
 import Footer from "../../footer/footer";
-import {setStorageData} from "../step-pages.helpers";
+import {boolToStr, setStorageData} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";
 
 const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
@@ -40,7 +40,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
         const formValues = {
             [FormData.SURNAME]: surname,
             [FormData.NAME]: name, [FormData.LASTNAME]: lastname,
-            [FormData.DATE_OF_BIRTH]: dateOfBirth, [FormData.MORE_18]: String(+more18),
+            [FormData.DATE_OF_BIRTH]: dateOfBirth, [FormData.MORE_18]: boolToStr(more18),
             [FormData.GENDER]: String(gender), [FormData.EMAIL]: email
         };
         Object.entries(formValues).forEach(([key, value]) => setStorageData(key, value));
@@ -65,7 +65,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
                 <option value={Gender.MALE}>{Gender.MALE}</option>
                 <option value={Gender.FEMALE}>{Gender.FEMALE}</option>
             </Dropdown>
-            <Label htmlFor="more_18" alignItems="center">I am 18+ years ago</Label>
+            <Label htmlFor="more_18" alignItems="center">I am 18+ years old</Label>
             <FormInput id="more_18" type="checkbox" checked={more18} onChange={handleCheck}/>
         </MainDataStyled>
         <Footer onNextStep={handleNextStepClick} onPrevStep={onPrevStep} isValid={isValid}/>

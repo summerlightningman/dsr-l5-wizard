@@ -1,7 +1,7 @@
 import {ChangeEventHandler, FC, useState} from 'react';
 import Label from "../../ui/label";
 import Text from "../../ui/text";
-import {getStorageData, setStorageData} from "../step-pages.helpers";
+import {boolToStr, getStorageData, setStorageData} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";
 import FormInput from "../../ui/form-input";
 import Footer from "../../footer/footer";
@@ -22,8 +22,8 @@ const Agreements: FC<AgreementsProps> = ({onPrevStep, onNextStep}) => {
         setCookieAgreement(e.currentTarget.checked);
 
     const handleNextStepClick = () => {
-        setStorageData(FormData.DATA_AGREEMENT, String(+dataAgreement));
-        setStorageData(FormData.COOKIE_AGREEMENT, String(+cookieAgreement));
+        setStorageData(FormData.DATA_AGREEMENT, boolToStr(dataAgreement));
+        setStorageData(FormData.COOKIE_AGREEMENT, boolToStr(cookieAgreement));
         onNextStep();
     };
 
