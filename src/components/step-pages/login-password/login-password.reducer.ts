@@ -5,7 +5,7 @@ import {getStorageData} from "../step-pages.helpers";
 export const loginPasswordInitialState = {
         login: getStorageData(FormData.LOGIN),
         password: getStorageData(FormData.PASSWORD),
-        passwordRetype: ''
+        passwordRetype: getStorageData(FormData.PASSWORD_RETYPE)
     }
 
 

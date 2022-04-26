@@ -10,6 +10,7 @@ export interface StepPageProps {
 export enum FormData {
     LOGIN = 'login',
     PASSWORD = 'password',
+    PASSWORD_RETYPE = 'passwordRetype',
     SURNAME = 'surname',
     NAME = 'name',
     LASTNAME = 'lastname',

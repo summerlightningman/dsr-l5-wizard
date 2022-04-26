@@ -33,7 +33,8 @@ const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep}) => {
     const handleNextStepClick = () => {
         const formValues = {
             [FormData.LOGIN]: login,
-            [FormData.PASSWORD]: password
+            [FormData.PASSWORD]: password,
+            [FormData.PASSWORD_RETYPE]: passwordRetype
         };
         Object.entries(formValues).forEach(([key, value]) => setStorageData(key, value));
 
