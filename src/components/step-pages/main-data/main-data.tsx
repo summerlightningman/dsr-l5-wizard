@@ -4,7 +4,7 @@ import MainDataStyled from "./main-data.styled";
 import FormInput from "../../ui/form-input";
 import mainDataReducer, {mainDataInitialState} from "./main-data.reducer";
 import Label from "../../ui/label";
-import Dropdown from "../../ui/Dropdown";
+import Dropdown from "../../ui/dropdown";
 import Footer from "../../footer/footer";
 import {boolToStr, setStorageData} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";

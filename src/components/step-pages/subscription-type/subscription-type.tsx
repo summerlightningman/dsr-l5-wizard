@@ -2,7 +2,7 @@ import {ChangeEventHandler, FC, useState} from "react";
 import {Subscription, SubscriptionTypeProps} from "./subscription-type.types";
 import SubscriptionTypeStyled from "./subscription-type.styled";
 import Label from "../../ui/label";
-import Dropdown from "../../ui/Dropdown";
+import Dropdown from "../../ui/dropdown";
 import Footer from "../../footer/footer";
 import {getStorageData, setStorageData} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";
