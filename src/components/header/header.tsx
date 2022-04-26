@@ -5,11 +5,12 @@ import Separator from "../ui/separator";
 import {HeaderProps} from "./header.types";
 
 const Header: FC<HeaderProps> = ({currStep}) => {
+    const headerText = currStep === 6 ? 'Final' : `Fill the form: Step ${currStep}`;
 
     return (
         <HeaderStyled>
             <HeaderText>
-                Fill the form: Step {currStep}
+                {headerText}
             </HeaderText>
             <Separator/>
         </HeaderStyled>

@@ -7,25 +7,29 @@ import SubscriptionType from "../step-pages/subscription-type/subscription-type"
 import MainData from "../step-pages/main-data/main-data";
 import BankCard from "../step-pages/bank-card/bank-card";
 import Agreements from "../step-pages/agreements/agreements";
+import Final from "../step-pages/final/final";
 
 
 const App = () => {
-    const [step, setStep] = useState<Step>(3);
+    const [step, setStep] = useState<Step>(1);
     const goToPrevStep = useCallback(() => setStep(step - 1), [step]);
     const goToNextStep = useCallback(() => setStep(step + 1), [step]);
 
     const content = useMemo(() => {
+        const props = {onPrevStep: goToPrevStep, onNextStep: goToNextStep};
         switch (step) {
             case 1:
-                return <LoginPassword onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <LoginPassword {...props}/>
             case 2:
-                return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
+                return <SubscriptionType {...props}/>
             case 3:
-                return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
+                return <MainData {...props}/>
             case 4:
-                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
+                return <BankCard {...props}/>
             case 5:
-                return <Agreements onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
+                return <Agreements {...props}/>
+            case 6:
+                return <Final {...props}/>
         }
         return <></>
     }, [goToNextStep, goToPrevStep, step])
