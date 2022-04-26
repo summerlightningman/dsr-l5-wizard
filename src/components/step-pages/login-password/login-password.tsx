@@ -4,16 +4,18 @@ import LoginPasswordStyled from "./login-password.styled";
 import FormInput from "../../ui/form-input";
 import Label from "../../ui/label";
 import {LoginPasswordActionType, LoginPasswordProps} from "./login-password.types";
-import loginPasswordReducer, {getLoginPasswordInitialState} from "./login-password.reducer";
+import loginPasswordReducer, {loginPasswordInitialState} from "./login-password.reducer";
 import Footer from "../../footer/footer";
+import {setStorageData} from "../step-pages.helpers";
+import {FormData} from "../step-pages.types";
 
 
-const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep, storageKey}) => {
+const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep}) => {
     const [{
         login,
         password,
         passwordRetype
-    }, dispatch] = useReducer(loginPasswordReducer, getLoginPasswordInitialState(storageKey));
+    }, dispatch] = useReducer(loginPasswordReducer, loginPasswordInitialState);
     const isValid = [
         !!login,
         !!password,
@@ -29,7 +31,12 @@ const LoginPassword: FC<LoginPasswordProps> = ({onNextStep, onPrevStep, storageK
         e => dispatch({type, payload: e.currentTarget.value});
 
     const handleNextStepClick = () => {
-        window.localStorage.setItem(storageKey, JSON.stringify({login, password}));
+        const formValues = {
+            [FormData.LOGIN]: login,
+            [FormData.PASSWORD]: password
+        };
+        Object.entries(formValues).forEach(([key, value]) => setStorageData(key, value));
+
         onNextStep();
     };
 

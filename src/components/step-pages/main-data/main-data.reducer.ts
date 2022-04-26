@@ -1,19 +1,15 @@
 import {Gender, MainDataAction, MainDataActionType, MainDataState} from "./main-data.types";
-import {StorageKey} from "../step-pages.types";
-import {getStorageDataByKey} from "../step-pages.helpers";
+import {FormData} from "../step-pages.types";
+import {getStorageData} from "../step-pages.helpers";
 
-
-export const getInitialState = (key: StorageKey) => {
-    const initialData = getStorageDataByKey(key);
-    return ({
-        surname: initialData?.surname || '',
-        name: initialData?.name || '',
-        lastname: initialData?.lastname || '',
-        dateOfBirth: initialData?.dateOfBirth || new Date().toLocaleString('ru-RU'),
-        email: initialData?.email || '',
-        gender: initialData?.gender || Gender.NONE,
-        more18: initialData?.more18 || false
-    })
+export const mainDataInitialState: MainDataState = {
+    surname: getStorageData(FormData.SURNAME) || '',
+    name: getStorageData(FormData.NAME) || '',
+    lastname: getStorageData(FormData.LASTNAME) || '',
+    dateOfBirth: getStorageData(FormData.DATE_OF_BIRTH) || new Date().toLocaleString('ru-RU'),
+    email: getStorageData(FormData.EMAIL) || '',
+    gender: getStorageData(FormData.GENDER) as Gender || Gender.NONE,
+    more18: !!getStorageData(FormData.MORE_18)
 }
 
 const mainDataReducer = (state: MainDataState, action: MainDataAction): MainDataState => {

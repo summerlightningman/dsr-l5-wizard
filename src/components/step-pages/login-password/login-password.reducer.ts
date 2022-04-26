@@ -1,15 +1,13 @@
 import {LoginPasswordAction, LoginPasswordActionType, LoginPasswordState} from "./login-password.types";
-import {StorageKey} from "../step-pages.types";
-import {getStorageDataByKey} from "../step-pages.helpers";
+import {FormData} from "../step-pages.types";
+import {getStorageData} from "../step-pages.helpers";
 
-export const getLoginPasswordInitialState = (storageKey: StorageKey): LoginPasswordState => {
-    const initialData = getStorageDataByKey(storageKey);
-    return {
-        login: initialData?.login,
-        password: initialData?.password,
+export const loginPasswordInitialState = {
+        login: getStorageData(FormData.LOGIN),
+        password: getStorageData(FormData.PASSWORD),
         passwordRetype: ''
     }
-};
+
 
 const loginPasswordReducer = (state: LoginPasswordState, action: LoginPasswordAction) => {
     switch (action.type) {

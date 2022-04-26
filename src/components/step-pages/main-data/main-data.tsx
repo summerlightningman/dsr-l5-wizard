@@ -2,12 +2,14 @@ import {ChangeEventHandler, FC, KeyboardEventHandler, useReducer} from "react";
 import {Gender, MainDataActionType, MainDataProps} from "./main-data.types";
 import MainDataStyled from "./main-data.styled";
 import FormInput from "../../ui/form-input";
-import mainDataReducer, {getInitialState} from "./main-data.reducer";
+import mainDataReducer, {mainDataInitialState} from "./main-data.reducer";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
 import Footer from "../../footer/footer";
+import {setStorageData} from "../step-pages.helpers";
+import {FormData} from "../step-pages.types";
 
-const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep, storageKey}) => {
+const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep}) => {
     const [{
         surname,
         name,
@@ -16,7 +18,7 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep, storageKey}) => {
         more18,
         gender,
         email
-    }, dispatch] = useReducer(mainDataReducer, getInitialState(storageKey));
+    }, dispatch] = useReducer(mainDataReducer, mainDataInitialState);
     const isValid = [
         !!surname,
         !!name,
@@ -33,12 +35,15 @@ const MainData: FC<MainDataProps> = ({onNextStep, onPrevStep, storageKey}) => {
     const handleCheck: ChangeEventHandler<HTMLInputElement> = e =>
         dispatch({type: MainDataActionType.SET_MORE_18, payload: e.currentTarget.checked});
     const handleChange: ChangeEventHandler<HTMLSelectElement> = e =>
-        // @ts-ignore
-        dispatch({type: MainDataActionType.SET_GENDER, payload: e.currentTarget.value});
+        dispatch({type: MainDataActionType.SET_GENDER, payload: e.currentTarget.value as Gender});
     const handleNextStepClick = () => {
-        window.localStorage.setItem(storageKey, JSON.stringify({
-            surname, name, lastname, dateOfBirth, more18, gender, email
-        }));
+        const formValues = {
+            [FormData.SURNAME]: surname,
+            [FormData.NAME]: name, [FormData.LASTNAME]: lastname,
+            [FormData.DATE_OF_BIRTH]: dateOfBirth, [FormData.MORE_18]: String(+more18),
+            [FormData.GENDER]: String(gender), [FormData.EMAIL]: email
+        };
+        Object.entries(formValues).forEach(([key, value]) => setStorageData(key, value));
         onNextStep();
     }
 

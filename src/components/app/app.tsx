@@ -6,6 +6,7 @@ import LoginPassword from "../step-pages/login-password/login-password";
 import SubscriptionType from "../step-pages/subscription-type/subscription-type";
 import MainData from "../step-pages/main-data/main-data";
 import BankCard from "../step-pages/bank-card/bank-card";
+import Agreements from "../step-pages/agreements/agreements";
 
 
 const App = () => {
@@ -16,13 +17,15 @@ const App = () => {
     const content = useMemo(() => {
         switch (step) {
             case 1:
-                return <LoginPassword onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="1"/>
+                return <LoginPassword onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
             case 2:
-                return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="2"/>
+                return <SubscriptionType onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
             case 3:
-                return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="3"/>
+                return <MainData onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
             case 4:
-                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep} storageKey="4"/>
+                return <BankCard onPrevStep={goToPrevStep} onNextStep={goToNextStep} />
+            case 5:
+                return <Agreements onPrevStep={goToPrevStep} onNextStep={goToNextStep}/>
         }
         return <></>
     }, [goToNextStep, goToPrevStep, step])
