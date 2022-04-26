@@ -4,7 +4,7 @@ import SubscriptionTypeStyled from "./subscription-type.styled";
 import Label from "../../ui/label";
 import Dropdown from "../../ui/Dropdown";
 import Footer from "../../footer/footer";
-import {getStorageData} from "../step-pages.helpers";
+import {getStorageData, setStorageData} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";
 
 const SubscriptionType: FC<SubscriptionTypeProps> = ({onPrevStep, onNextStep}) => {
@@ -16,7 +16,7 @@ const SubscriptionType: FC<SubscriptionTypeProps> = ({onPrevStep, onNextStep}) =
         setValue(e.currentTarget.value as Subscription);
 
     const goToNextStep = () => {
-
+        setStorageData(FormData.SUBSCRIPTION_TYPE, value);
         onNextStep();
     }
 
