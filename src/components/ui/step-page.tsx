@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {footerHeight, headerHeight} from "./variables";
 
-const StepPage = styled.main`
+const StepPage = styled.form`
   width: 100%;
   height: calc(100% - ${headerHeight} - ${footerHeight});
 

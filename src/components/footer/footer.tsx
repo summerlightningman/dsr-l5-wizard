@@ -3,11 +3,12 @@ import FooterStyled from "./footer.styled";
 
 import ControlButton from "../ui/control-button";
 import {FooterProps} from "./footer.types";
+import {getStorageData} from "../step-pages/step-pages.helpers";
 
 const Footer: FC<FooterProps> = ({onPrevStep, onNextStep, isValid}) => {
-    const step = window.localStorage.getItem('step') || 1;
+    const step = +getStorageData('step') || 1;
 
-    const isPrevDisabled = +step === 1;
+    const isPrevDisabled = step === 1;
 
     return (
         <FooterStyled>
