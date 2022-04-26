@@ -1,7 +1,7 @@
 import {ChangeEventHandler, FC, useState} from 'react';
 import Label from "../../ui/label";
 import Text from "../../ui/text";
-import {boolToStr, getStorageData, setStorageData} from "../step-pages.helpers";
+import {boolToStr, getStorageData, setStorageData, strToBool} from "../step-pages.helpers";
 import {FormData} from "../step-pages.types";
 import FormInput from "../../ui/form-input";
 import Footer from "../../footer/footer";
@@ -9,8 +9,11 @@ import {AgreementsProps} from "./agreements.types";
 import AgreementsStyled from "./agreements.styled";
 
 const Agreements: FC<AgreementsProps> = ({onPrevStep, onNextStep}) => {
-    const [dataAgreement, setDataAgreement] = useState<boolean>(false);
-    const [cookieAgreement, setCookieAgreement] = useState<boolean>(false);
+    const dataAgreementInitial = strToBool(getStorageData(FormData.DATA_AGREEMENT));
+    const cookieAgreementInitial = strToBool(getStorageData(FormData.COOKIE_AGREEMENT));
+
+    const [dataAgreement, setDataAgreement] = useState<boolean>(dataAgreementInitial);
+    const [cookieAgreement, setCookieAgreement] = useState<boolean>(cookieAgreementInitial);
 
     const isValid = dataAgreement && cookieAgreement;
     const login = getStorageData(FormData.LOGIN) || '[Not filled]';
